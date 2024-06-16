@@ -2,8 +2,6 @@ import torch
 import torchvision
 from torchvision import transforms
 import torch.nn as nn
-from PIL import Image
-import numpy as np
 
 
 class DenseNet201(nn.Module):
@@ -21,9 +19,7 @@ class DenseNet201(nn.Module):
         return out
 
 
-def model_pipeline(image):
-    model = DenseNet201()
-    model.load_state_dict(torch.load('model_weights.ckpt', map_location=torch.device('cpu')))
+def model_pipeline(image, model):
     model.eval()
     if image.mode != 'RGB':
         image = image.convert('RGB')
